@@ -156,7 +156,7 @@ These features are currently under development and will be added soon:
 ---
 
 ## 🧑‍💻 Author
-**Aakash Singh**  
+**Akash Singh**  
 Backend Developer — Node.js | Express | MongoDB  
 
 ---
