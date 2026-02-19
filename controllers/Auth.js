@@ -218,7 +218,7 @@ exports.login = async(req, res)=>{
       success:true,
       message:"logged in successful",
       token,
-      existingUser
+      user:existingUser
     })
 
   } catch (error) {
