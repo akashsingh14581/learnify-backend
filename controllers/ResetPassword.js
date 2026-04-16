@@ -47,7 +47,7 @@ exports.resetPasswordToken = async (req, res) => {
     `;
     await mailSender(
       existingUser.email,
-      "Password Reset | StudyNotion",
+      "Password Reset | CodeElevator",
       emailBody
     );
 

@@ -281,7 +281,7 @@ exports.changePassword = async(req, res)=>{
       <p>Your account password was changed successfully.</p>
       <p>If this wasn't you, please contact support immediately!</p>
     `;
-    await mailSender(existingUser.email, "Password Changed | StudyNotion", emailBody);
+    await mailSender(existingUser.email, "Password Changed | CodeElevator", emailBody);
 
      return res.status(200).json({
       success: true,

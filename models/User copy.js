@@ -4,11 +4,15 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
+      required: [true, "First name is required"],
       trim: true,
+      minlength: [3, "Minimum 3 characters required"],
     },
     lastName: {
       type: String,
+      required: [true, "Last name is required"],
       trim: true,
+      minlength: [3, "Minimum 3 characters required"],
     },
     email: {
       type: String,
@@ -20,11 +24,10 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: [true, "Password is required"],
+      minlength: [8, "Minimum 8 characters required"],
+      select: false, // By default password hidden in queries
     },
-    googleId:{
-      type:String,
-    },
-
     accountType: {
       type: String,
       enum: ["Admin", "Instructor", "Student"],

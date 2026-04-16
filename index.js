@@ -1,4 +1,6 @@
 require('dotenv').config();
+const passport = require("passport");
+require("./config/passport");
 const express = require('express');
 const app = express();
 // import routes
@@ -6,8 +8,7 @@ const userRoutes = require('./routes/User');
 const profileRoutes = require('./routes/Profile');
 const paymentRoutes = require('./routes/Payment');
 const courseRoutes = require('./routes/Course');
-
-
+const Oauth = require('./routes/OAuth');
 const dataBase = require('./config/database');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -29,6 +30,7 @@ app.use(
     })
 )
 
+app.use(passport.initialize());
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : '/tmp/'
@@ -42,7 +44,7 @@ app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/profile', profileRoutes);
 app.use('/api/v1/payment', paymentRoutes);
 app.use('/api/v1/course', courseRoutes);
-
+app.use('/auth', Oauth)
 
 
 // default route
