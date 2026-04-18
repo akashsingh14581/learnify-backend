@@ -88,37 +88,7 @@ exports.deleteAccount = async (req, res) => {
   }
 };
 
-// get all users
-exports.getAllUserDetails = async(req, res)=>{
-  try {
-    // fetch data
-    const userId = req.user.id;
 
-    //validation and get user detail
-    const userDetails = await User.findById(userId).populate("additionalDetails").exec();
-
-    if(!userDetails){
-      return res.status(404).json({
-        success:false,
-        message:"user not found"
-      })
-    }
-
-    return res.status(200).json({
-      success:true,
-      message:"getching user details is successful",
-      userDetails
-    })
-
-  } catch (error) {
-    console.error("getting an error while finding user Details", error);
-    return res.status(500).json({
-      success:false,
-      message:"internal server error in getting all user details",
-      error:error.message
-    })
-  }
-}
 
 
 // for checking pending

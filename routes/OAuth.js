@@ -36,4 +36,43 @@ router.get(
     }
   }
 );
+
+
+
+// route for github login
+
+// step 1: redirect to github
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+
+// step 2: callback
+router.get(
+  "/github/callback",
+  passport.authenticate("github", { session: false }),
+  (req, res) => {
+    try {
+      const token = jwt.sign(
+        {
+          id: req.user._id,
+          email: req.user.email,
+          accountType: req.user.accountType,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "7d" }
+      );
+
+      res.redirect(
+        `${process.env.CLIENT_URL}/oauth-success?token=${token}`
+      );
+
+    } catch (error) {
+      console.error("GitHub OAuth Error:", error);
+      res.redirect(
+        `${process.env.CLIENT_URL}/login?error=oauth_failed`
+      );
+    }
+  }
+);
 module.exports = router
